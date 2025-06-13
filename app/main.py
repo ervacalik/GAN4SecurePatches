@@ -1,34 +1,34 @@
 import sys
 import os
 
-# Proje ana dizinini PYTHONPATH'e ekle
+# Proje kök dizinini sys.path'e ekle → src klasörüne erişim sağlanır
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
+# Gerekli kütüphaneler
 import streamlit as st
 import torch
 import torchvision.transforms as transforms
 from PIL import Image
 import matplotlib.pyplot as plt
 import numpy as np
-
 from skimage.metrics import peak_signal_noise_ratio, structural_similarity
 from src.cnn_model import CNN
 from src.gan_model import Generator, Discriminator
 from src.gradcam import GradCAM
 from src.utils import extract_patches, patch_to_bytes, generate_key, aes_encrypt
-
 import torch.nn as nn
 import torch.optim as optim
 import time
 
+# GPU varsa kullan, yoksa CPU
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-# Load CNN model
+# Eğitilmiş CNN modelini yükle (sınıflandırma ve GradCAM için)
 cnn_model = CNN().to(device)
 cnn_model.load_state_dict(torch.load('models/cnn_model.pth'))
 cnn_model.eval()
 
-# Metric hesaplama
+# PSNR ve SSIM hesaplamak için yardımcı fonksiyon
 def calculate_metrics(real_patch, gan_patch):
     real_patch_norm = (real_patch - real_patch.min()) / (real_patch.max() - real_patch.min())
     psnr = peak_signal_noise_ratio(real_patch_norm, gan_patch, data_range=1.0)
@@ -46,32 +46,36 @@ st.title("🔐 Görüntü Patch Şifreleme & GAN Kurtarma Demo")
 st.markdown("""
 Bu uygulama, **GradCAM tabanlı adaptif AES şifreleme** ve **GAN ile patch recovery** sürecini gösterir.
 """)
-
+# Görsel yükleme adımı
 st.header("📥 1️⃣ Görsel Yükleme")
 uploaded_file = st.file_uploader("Bir görüntü yükleyin", type=["png", "jpg", "jpeg"])
 
 if uploaded_file is not None:
+    # Yüklenen görüntüyü RGB formatına çevirir
     image = Image.open(uploaded_file).convert('RGB')
     st.image(image, caption='Yüklenen Görüntü', use_column_width=True)
 
+    # Görüntüyü CNN boyutuna uyarlamak için dönüşüm uygula
     transform = transforms.Compose([
         transforms.Resize((32, 32)),
         transforms.ToTensor(),
         transforms.Normalize((0.5,0.5,0.5), (0.5,0.5,0.5))
     ])
-
     image_tensor = transform(image).unsqueeze(0).to(device)
 
+    # GradCAM ile anlamlı bölgeleri çıkar
     st.header("🔍 2️⃣ GradCAM Çıktısı")
-    label = 0  # örnek
+    label = 0  # Örnek sınıf index( manuel belirlenmiş)
     gradcam = GradCAM(cnn_model, cnn_model.conv2)
     heatmap = gradcam(image_tensor, target_class=label)
 
+    # Görselleştir
     fig, ax = plt.subplots()
     ax.imshow(np.transpose((image_tensor[0].cpu().numpy() * 0.5 + 0.5), (1,2,0)))
     ax.imshow(heatmap, cmap='jet', alpha=0.5)
     st.pyplot(fig)
 
+    # AES-128 / AES-256 ile patch bazlı şifreleme
     st.header("🔐 3️⃣ Adaptif Şifreleme Süresi")
     patches = extract_patches(image_tensor[0].cpu(), patch_size=8, stride=8)
     key_128 = generate_key(128)
@@ -95,6 +99,7 @@ if uploaded_file is not None:
             patch_importance = patch_heatmap.mean()
             patch_bytes = patch_to_bytes(patch)
 
+            # Önemli patch → AES-256, diğerleri → AES-128
             if patch_importance > importance_threshold:
                 ciphertext = aes_encrypt(patch_bytes, key_256)
             else:
@@ -106,6 +111,7 @@ if uploaded_file is not None:
     total_time = (end_time - start_time) * 1000
     st.write(f"Adaptif Şifreleme Süresi: **{total_time:.2f} ms**")
 
+    # GAN Eğitimi ve Sonuçların Karşılaştırılması
     # GAN Eğitme bölümü
     st.header("🤖 4️⃣ GAN Eğitimi ve Karşılaştırma")
 
@@ -143,7 +149,7 @@ if uploaded_file is not None:
 
                 noise = torch.randn((batch_size_curr, 8*8*3), device=device)
 
-                # Discriminator
+                # Discriminator eğitimi
                 D.zero_grad()
                 real_label = torch.ones((batch_size_curr, 1), device=device)
                 fake_label = torch.zeros((batch_size_curr, 1), device=device)
@@ -159,7 +165,7 @@ if uploaded_file is not None:
                 d_loss.backward()
                 d_optimizer.step()
 
-                # Generator
+                # Generator eğitimi
                 G.zero_grad()
                 generated_patch = G(noise)
                 output = D(generated_patch)
@@ -170,14 +176,14 @@ if uploaded_file is not None:
             progress_bar.progress((epoch+1) / epochs)
             status_text.text(f"[Epoch {epoch+1}/{epochs}] D loss: {d_loss.item():.4f}, G loss: {g_loss.item():.4f}")
 
-        # Eğitim bitti → test için ilk patch'i kullanıyoruz
+        # Eğitim tamamlandığında ilk patch'in tahminini yap
         real_patch = patches[0].cpu().numpy()
         noise = torch.randn((1, 8*8*3), device=device)
         with torch.no_grad():
             output = G(noise).view(3,8,8).cpu().numpy()
             output = (output - output.min()) / (output.max() - output.min())
 
-        # Metrikler
+        # PSNR & SSIM hesapla
         psnr, ssim = calculate_metrics(real_patch, output)
 
         # Görselleştirme
