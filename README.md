@@ -267,6 +267,7 @@ streamlit run app/main.py
 
 **👩‍💻 Geliştirici**: Erva Çalık  
 **📧 E-posta**: ervaacalik@outlook.com
+
 **🗓️ Güncelleme Tarihi**: 13 Haziran 2025
 
 **🔒 Lisans**: MIT License  
