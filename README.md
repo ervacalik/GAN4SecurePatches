@@ -73,16 +73,14 @@ venv\Scripts\activate           # Windows
 ```
 
 📥 Paket Kurulumu
-
+```bash
 pip install -r requirements.txt
-
+```
 
 🚀 Uygulamayı Başlatmak
-bash
-Kopyala
-Düzenle
+```
 streamlit run app.py
-
+```
 ---
 
 ## 🧠 CNN Eğitimi
@@ -93,7 +91,7 @@ Projede kullanılan CNN modeli basit ama etkili bir mimariye sahiptir:
 Conv2d(3→32) → ReLU → MaxPool
 Conv2d(32→64) → ReLU → MaxPool
 Flatten → Dropout(0.2) → FC(128) → FC(10)
-
+```
 
 
 Eğitim Adımları:
@@ -106,9 +104,9 @@ SGD optimizasyonu
 10 epoch boyunca eğitim
 
 Eğitim Scripti:
-
+```
 python train_cnn.py
-
+```
 Eğitim sonunda cnn_model.pth dosyası models/ klasörüne kaydedilir.
 
 ---
