@@ -176,7 +176,7 @@ Orijinal patch ile GAN tahmini karşılaştırılır
 
 PSNR ve SSIM hesaplanır
 
-Eğitim sonrası model models/gan_generator.pth olarak kaydedilir.
+
 
 ---
 
@@ -195,8 +195,8 @@ Bu projede GAN modeli, şifrelenmiş patch’lerden orijinali yeniden üretmeye 
 
 | Patch ID | PSNR (dB) | SSIM    |
 |----------|-----------|---------|
-| 1        | 25.87     | 0.8441  |
-| 2        | 24.01     | 0.8123  |
+| 1        | 6.87     | -0.8441  |
+| 2        | 9.01     | -0.8123  |
 
 ![GAN Output](docs/gan_output_patch.png)
 
