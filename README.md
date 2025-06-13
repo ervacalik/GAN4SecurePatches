@@ -73,12 +73,12 @@ source venv/bin/activate        # Linux/macOS
 venv\Scripts\activate           # Windows
 ```
 
-📥 Paket Kurulumu
+### 📥 Paket Kurulumu
 ```bash
 pip install -r requirements.txt
 ```
 
-🚀 Uygulamayı Başlatmak
+### 🚀 Uygulamayı Başlatmak
 ```
 streamlit run app/main.py
 ```
@@ -95,7 +95,7 @@ Flatten → Dropout(0.2) → FC(128) → FC(10)
 ```
 
 
-Eğitim Adımları:
+**Eğitim Adımları:**
 
 1. CIFAR-10 veri seti ile eğitim
 
@@ -105,7 +105,7 @@ Eğitim Adımları:
 
 4. 10 epoch boyunca eğitim
 
-Eğitim Scripti:
+**Eğitim Scripti:**
 ```
 python train_cnn.py
 ```
@@ -162,12 +162,12 @@ Linear → ReLU → Linear → ReLU → Linear → Tanh
 Linear → LeakyReLU → Linear → LeakyReLU → Linear → Sigmoid
 ```
 
-Eğitim Scripti:
+**Eğitim Scripti:**
 ```bash
 python train_gan.py
 ```
 
-Tahmin Sonrası:
+**Tahmin Sonrası:**
 Orijinal patch ile GAN tahmini karşılaştırılır
 
 PSNR ve SSIM hesaplanır
