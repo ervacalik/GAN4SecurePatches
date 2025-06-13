@@ -4,6 +4,9 @@
 
 Bu proje, görüntülerdeki anlamlı bölgelerin **Grad-CAM** ile belirlenip adaptif olarak **AES-128/256** algoritmalarıyla şifrelenmesini ve bu şifreli yama (patch) verilerin **GAN** yardımıyla yeniden oluşturulmasını hedefler. Ayrıca **CNN** modeli ile sınıflandırma yapılır ve **Grad-CAM** ile modelin dikkat ettiği alanlar görselleştirilir.
 
+> **Not:** Bu projede amaç, şifrelenmiş yamanın GAN tarafından başarıyla değil, başarısız şekilde üretilmesidir. Bu, şifrelemenin güvenliğini gösterir.
+
+
 
 ![Uygulama](example_gradcam.gif)
 
