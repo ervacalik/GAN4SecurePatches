@@ -218,7 +218,7 @@ Bu proje için geliştirilen Streamlit uygulaması, tüm süreci etkileşimli bi
 ```bash
 streamlit run app/main.py
 ```
-**🧩 Arayüz Özellikleri**
+### 🧩 Arayüz Özellikleri
 - GradCAM çıktısının ısı haritası ile görselleştirilmesi
 
 - Patch bazlı AES tipi gösterimi (renklendirilmiş)
