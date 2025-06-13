@@ -269,6 +269,8 @@ streamlit run app/main.py
 **📧 E-posta**: ervaacalik@outlook.com
 **🗓️ Güncelleme Tarihi**: 13 Haziran 2025
 
+**🔒 Lisans**: MIT License  
+Bu proje açık kaynak olarak paylaşılmıştır. Eğitim, araştırma ve geliştirme amaçlarıyla özgürce kullanılabilir.
 
 
 
