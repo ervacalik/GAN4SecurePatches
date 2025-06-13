@@ -124,7 +124,7 @@ Grad-CAM, CNN'in hangi görüntü bölgelerine odaklandığını analiz etmek i�
 3. Isı haritası (heatmap) olarak görselleştirilir
 
 ### Örnek:
-![GradCAM](docs/example_gradcam.gif)
+![GradCAM](docs/example_gradcam.png)
 
 > Bu ısı haritası adaptif şifreleme için temel oluşturur.
 ---
