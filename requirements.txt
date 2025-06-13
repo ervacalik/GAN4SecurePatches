@@ -1,0 +1,18 @@
+# Derin Öğrenme ve Görüntü İşleme
+torch>=1.13.0
+torchvision>=0.14.0
+numpy>=1.22.0
+matplotlib>=3.5.0
+scikit-image>=0.19.0
+
+# Web Arayüz
+streamlit>=1.10.0
+
+# Kriptografi
+pycryptodome>=3.15.0
+
+# PDF desteği yok ama gerekirse poppler ve pytesseract da eklenebilir
+# Eğer OCR işlevi yoksa gerekmez
+
+# Geliştirme Araçları (isteğe bağlı)
+tqdm>=4.62.0
