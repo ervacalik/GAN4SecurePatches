@@ -5,39 +5,36 @@
 Bu proje, görüntülerdeki anlamlı bölgelerin **Grad-CAM** ile belirlenip adaptif olarak **AES-128/256** algoritmalarıyla şifrelenmesini ve bu şifreli yama (patch) verilerin **GAN** yardımıyla yeniden oluşturulmasını hedefler. Ayrıca **CNN** modeli ile sınıflandırma yapılır ve **Grad-CAM** ile modelin dikkat ettiği alanlar görselleştirilir.
 
 
-![Uygulama](demo.gif)
+![Uygulama](example_gradcam.gif)
 
-## 🎯 Amaç
-- 🧠 CNN modeliyle görüntü sınıflandırması
-- 🔥 Grad-CAM ile dikkat haritalarının çıkarılması
-- 🔐 GradCAM skoru yüksek patch'lerin AES-256 ile, düşüklerin AES-128 ile şifrelenmesi
-- 🤖 GAN ile bu patch'lerin yeniden üretilmesi ve kalite ölçümü (PSNR / SSIM)
+## 🏗️ Teknik Mimari
 
----
+### 🔹 Genel Akış
+Görüntü → CNN → Grad-CAM → Patch Extraction → AES Şifreleme → GAN ile Onarma → PSNR/SSIM Hesaplama
 
-## 🚀 Özellikler
-- [x] CIFAR-10 ile örnek eğitim ve test
-- [x] PyTorch tabanlı özelleştirilmiş CNN mimarisi
-- [x] Streamlit arayüzü ile demo uygulama
-- [x] Adaptif AES şifreleme
-- [x] GAN ile şifreli veriden geri üretim
-- [x] Grad-CAM görselleştirme
-- [x] Metriklerle kalite değerlendirme (PSNR, SSIM)
+### 🔹 CNN + GradCAM
+- Basit bir CNN ile sınıflandırma
+- `conv2` katmanından Grad-CAM aktivasyonları çıkarılır
+- Sınıfa özel dikkat haritası üretilir
 
----
+### 🔹 AES Şifreleme (Adaptif)
+- Grad-CAM skoruna göre patch'ler önemli / önemsiz olarak etiketlenir
+- Önemli patch'ler: **AES-256**
+- Önemsiz patch'ler: **AES-128**
+- Klasik tek tip şifreleme ile karşılaştırma yapılır
 
-## 🧠 Kullanılan Teknolojiler
-- Python 3.9+
-- PyTorch, torchvision
-- NumPy, Matplotlib, Streamlit
-- Crypto (pycryptodome)
-- scikit-image (skimage)
+### 🔹 GAN ile Patch Kurtarma
+- Generator: Patch benzeri örnek üretir (8×8 RGB)
+- Discriminator: Gerçek vs sahte ayrımı yapar
+- Girdi: Noise vektör (şifreli veri yerine)
+- Eğitim sonrası GAN, patch'leri geri üretir
 
----
+### 🔹 Kalite Ölçüm
+- `PSNR (Peak Signal to Noise Ratio)`
+- `SSIM (Structural Similarity Index)`
 
-## 🗂️ Dosya Yapısı
-
-project/
+## 📁 Dosya Yapısı
+GAN4SecurePatches/
 ├── models/
 │ ├── cnn_model.pth
 │ └── gan_generator.pth
@@ -46,11 +43,42 @@ project/
 │ ├── gan_model.py
 │ ├── gradcam.py
 │ └── utils.py
-├── app.py # Streamlit arayüzü
-├── train_cnn.py # CNN eğitimi
-├── train_gan.py # GAN eğitimi
+├── app.py # Streamlit demo arayüzü
+├── train_cnn.py # CNN eğitim scripti
+├── train_gan.py # GAN eğitim scripti
 ├── requirements.txt
-└── README.md
+├── README.md
+└── docs/
+├── example_gradcam.gif
+
+---
+
+## 💻 Kurulum ve Gereksinimler
+
+### 📦 Bağımlılıklar
+- Python 3.9+
+- PyTorch
+- torchvision
+- Streamlit
+- matplotlib
+- numpy
+- pycryptodome
+- scikit-image
+
+### 🧰 Sanal Ortam (Önerilir)
+```bash
+python -m venv venv
+source venv/bin/activate        # Linux/macOS
+venv\Scripts\activate           # Windows
+
+
+pip install -r requirements.txt
+
+
+
+
+
+
 
 
 
