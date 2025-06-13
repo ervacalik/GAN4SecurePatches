@@ -194,7 +194,30 @@ Eğitim sonrası model models/gan_generator.pth olarak kaydedilir.
 
 > Daha yüksek PSNR ve SSIM → daha iyi kurtarılmış patch demektir.
 
+---
 
+## 🌐 Streamlit Arayüzü
+
+Bu proje için geliştirilen Streamlit uygulaması, tüm süreci etkileşimli bir şekilde görselleştirmenizi sağlar.
+
+### 🧪 Adımlar:
+1. Görüntü yüklenir (`jpg`, `png`, `jpeg`)
+2. CNN modeli tahmin yapar
+3. GradCAM çıktısı oluşturulur
+4. Patch’ler çıkarılır ve AES-128/256 ile şifrelenir
+5. GAN ile ilk patch geri üretilir
+6. PSNR & SSIM ile kalite ölçülür
+
+### 🧭 Arayüzden Seçilebilir:
+- Şifreleme tipi: adaptif vs klasik
+- Şifreleme süresi anlık olarak gösterilir
+- GAN eğitimi anlık olarak takip edilir
+- Görselleştirme karşılaştırmalı olarak gösterilir
+
+### 🔧 Uygulamayı Başlatmak için:
+```bash
+streamlit run app/main.py
+```
 
 
 
