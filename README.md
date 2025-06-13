@@ -70,6 +70,7 @@ GAN4SecurePatches/
 python -m venv venv
 source venv/bin/activate        # Linux/macOS
 venv\Scripts\activate           # Windows
+```
 
 📥 Paket Kurulumu
 
