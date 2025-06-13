@@ -34,6 +34,7 @@ Görüntü → CNN → Grad-CAM → Patch Extraction → AES Şifreleme → GAN 
 - `SSIM (Structural Similarity Index)`
 
 ## 📁 Dosya Yapısı
+```
 GAN4SecurePatches/
 ├── models/
 │ ├── cnn_model.pth
@@ -50,7 +51,7 @@ GAN4SecurePatches/
 ├── README.md
 └── docs/
 ├── example_gradcam.gif
-
+```
 ---
 
 ## 💻 Kurulum ve Gereksinimler
@@ -79,7 +80,7 @@ pip install -r requirements.txt
 
 🚀 Uygulamayı Başlatmak
 ```
-streamlit run app.py
+streamlit run app/main.py
 ```
 ---
 
@@ -95,13 +96,14 @@ Flatten → Dropout(0.2) → FC(128) → FC(10)
 
 
 Eğitim Adımları:
-CIFAR-10 veri seti ile eğitim
 
-CrossEntropyLoss kullanımı
+1. CIFAR-10 veri seti ile eğitim
 
-SGD optimizasyonu
+2. CrossEntropyLoss kullanımı
 
-10 epoch boyunca eğitim
+3. SGD optimizasyonu
+
+4. 10 epoch boyunca eğitim
 
 Eğitim Scripti:
 ```
@@ -125,10 +127,6 @@ Grad-CAM, CNN'in hangi görüntü bölgelerine odaklandığını analiz etmek i�
 ![GradCAM](docs/example_gradcam.gif)
 
 > Bu ısı haritası adaptif şifreleme için temel oluşturur.
-🔐 Adaptif Şifreleme
-markdown
-Kopyala
-Düzenle
 ---
 
 ## 🔐 Adaptif Şifreleme
@@ -145,10 +143,7 @@ Grad-CAM skoruna göre her patch için farklı şifreleme düzeyi uygulanır.
 
 ### Süre Ölçümü:
 Hem adaptif hem klasik (sabit AES-256) yöntemler zaman karşılaştırması ile analiz edilir.
-🤖 GAN ile Patch Kurtarma
-markdown
-Kopyala
-Düzenle
+
 ---
 
 ## 🤖 GAN ile Patch Kurtarma
@@ -160,17 +155,18 @@ Adaptif olarak şifrelenmiş patch'ler, GAN ile yeniden inşa edilir.
 **Generator:**
 ```python
 Linear → ReLU → Linear → ReLU → Linear → Tanh
-Discriminator:
+```
 
-python
-Kopyala
-Düzenle
+**Discriminator:**
+```python
 Linear → LeakyReLU → Linear → LeakyReLU → Linear → Sigmoid
+```
+
 Eğitim Scripti:
-bash
-Kopyala
-Düzenle
+```bash
 python train_gan.py
+```
+
 Tahmin Sonrası:
 Orijinal patch ile GAN tahmini karşılaştırılır
 
@@ -178,15 +174,6 @@ PSNR ve SSIM hesaplanır
 
 Eğitim sonrası model models/gan_generator.pth olarak kaydedilir.
 
-yaml
-Kopyala
-Düzenle
-
----
-
-## 📈 Performans Değerlendirmesi
-
-```markdown
 ---
 
 ## 📈 Performans Değerlendirmesi
