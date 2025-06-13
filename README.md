@@ -244,6 +244,30 @@ streamlit run app/main.py
 
 ![GradCAM](docs/example_gradcam.gif)
 
+## 🚀 Gelecek Geliştirmeler
+
+### 🔹 Kısa Vadeli (1-2 Ay)
+- [ ] GAN girişine gerçek şifreli patch verilerinin entegrasyonu
+- [ ] Şifrelenmiş görsellerin tamamına yönelik rekonstrüksiyon
+- [ ] Streamlit'e GAN eğitim kontrol paneli (epoch sayısı, gürültü tipi)
+
+### 🔹 Orta Vadeli (2-4 Ay)
+- [ ] Patch bazlı kalite haritası çıkarımı
+- [ ] AES-GCM veya CBC gibi alternatif blok şifreleme modlarının karşılaştırılması
+- [ ] Görüntü segmentasyonu ile daha hassas bölgesel şifreleme
+
+### 🔹 Uzun Vadeli (5+ Ay)
+- [ ] Daha büyük veri setleri (ImageNet, STL10)
+- [ ] Çok sınıflı veri kurtarma (klaslara göre GAN adaptasyonu)
+- [ ] Mobil ve edge cihazlar için model küçültme ve hızlandırma
+
+> Bu proje araştırma temelli bir yapıda olduğu için yeni fikirlerle büyümeye açıktır 🌱
+
+## 📞 İletişim & Lisans
+
+**👩‍💻 Geliştirici**: Erva Çalık  
+**📧 E-posta**: ervaacalik@outlook.com
+**🗓️ Güncelleme Tarihi**: 13 Haziran 2025
 
 
 
