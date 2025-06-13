@@ -219,13 +219,13 @@ Bu proje için geliştirilen Streamlit uygulaması, tüm süreci etkileşimli bi
 streamlit run app/main.py
 ```
 **🧩 Arayüz Özellikleri**
-GradCAM çıktısının ısı haritası ile görselleştirilmesi
+- GradCAM çıktısının ısı haritası ile görselleştirilmesi
 
-Patch bazlı AES tipi gösterimi (renklendirilmiş)
+- Patch bazlı AES tipi gösterimi (renklendirilmiş)
 
-GAN eğitimi sırasında anlık ilerleme
+- GAN eğitimi sırasında anlık ilerleme
 
-Orijinal vs GAN tahmini karşılaştırması
+- Orijinal vs GAN tahmini karşılaştırması
 
 
 ![GradCAM](docs/example_gradcam.gif)
