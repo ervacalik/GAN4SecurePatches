@@ -177,9 +177,13 @@ Eğitim sonrası model models/gan_generator.pth olarak kaydedilir.
 ---
 
 ## 📈 Performans Değerlendirmesi
+Bu projede GAN modeli, şifrelenmiş patch’lerden orijinali yeniden üretmeye çalışır. Ancak **amaç**, üretimin başarılı olması değil — **başarısız olmasıdır**.
+
+### 🔐 Neden?
+- GAN, şifrelenmiş veriden orijinali **tahmin edemezse**, bu **şifrelemenin güvenli olduğunu gösterir.**
+- Bu nedenle düşük PSNR ve düşük/negatif SSIM, **şifreleme başarısı** olarak değerlendirilir.
 
 ### 🎯 Kullanılan Metrikler
-
 - **PSNR (Peak Signal to Noise Ratio)**: Sayısal fark
 - **SSIM (Structural Similarity Index)**: Görsel benzerlik
 
@@ -192,7 +196,7 @@ Eğitim sonrası model models/gan_generator.pth olarak kaydedilir.
 
 ![GAN Output](docs/gan_output_patch.png)
 
-> Daha yüksek PSNR ve SSIM → daha iyi kurtarılmış patch demektir.
+> 📉 **Daha düşük PSNR ve SSIM → daha iyi güvenlik seviyesi.**
 
 ---
 
