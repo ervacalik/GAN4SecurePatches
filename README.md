@@ -96,7 +96,7 @@ Conv2d(3→32) → ReLU → MaxPool
 Conv2d(32→64) → ReLU → MaxPool
 Flatten → Dropout(0.2) → FC(128) → FC(10)
 ```
-
+📌 Not: Modelde yer alan `Dropout(0.2)` katmanı, eğitim sırasında overfitting’i önlemeye yardımcı olmak için kullanılmıştır.
 
 **Eğitim Adımları:**
 
@@ -171,6 +171,7 @@ python train_gan.py
 ```
 
 **Tahmin Sonrası:**
+
 Orijinal patch ile GAN tahmini karşılaştırılır
 
 PSNR ve SSIM hesaplanır
