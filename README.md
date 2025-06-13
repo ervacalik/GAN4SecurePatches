@@ -39,21 +39,27 @@ Görüntü → CNN → Grad-CAM → Patch Extraction → AES Şifreleme → GAN 
 ## 📁 Dosya Yapısı
 ```
 GAN4SecurePatches/
+├── app/
+│ ├── main.py
+├── data/
+└── docs/
+├── example_gradcam.gif
+├── example_gradcam.png
+├── gan_output_patch.png
 ├── models/
-│ ├── cnn_model.pth
+│ ├── cnn_model.pth 
 │ └── gan_generator.pth
 ├── src/
+│ ├── __init__.py
 │ ├── cnn_model.py
 │ ├── gan_model.py
 │ ├── gradcam.py
 │ └── utils.py
-├── app.py # Streamlit demo arayüzü
 ├── train_cnn.py # CNN eğitim scripti
 ├── train_gan.py # GAN eğitim scripti
 ├── requirements.txt
 ├── README.md
-└── docs/
-├── example_gradcam.gif
+
 ```
 ---
 
