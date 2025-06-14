@@ -11,8 +11,3 @@ streamlit>=1.10.0
 # Kriptografi
 pycryptodome>=3.15.0
 
-# PDF desteği yok ama gerekirse poppler ve pytesseract da eklenebilir
-# Eğer OCR işlevi yoksa gerekmez
-
-# Geliştirme Araçları (isteğe bağlı)
-tqdm>=4.62.0
