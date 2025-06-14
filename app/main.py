@@ -25,7 +25,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Eğitilmiş CNN modelini yükle (sınıflandırma ve GradCAM için)
 cnn_model = CNN().to(device)
-cnn_model.load_state_dict(torch.load('models/cnn_model.pth'))
+cnn_model.load_state_dict(torch.load('models/cnn_model.pth', map_location=torch.device('cpu')))
 cnn_model.eval()
 
 # PSNR ve SSIM hesaplamak için yardımcı fonksiyon
